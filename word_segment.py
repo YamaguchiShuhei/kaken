@@ -6,7 +6,6 @@ import time
 import sys
 import os
 
-
 def _read_words(filename):
     f = open(filename, "r")
     line = f.readline()
@@ -67,8 +66,8 @@ def _sentence_list(raw_data, cha_id, SENT_len):
         
 
 def make_data(data_path, SENT_len):
-    train_path = os.path.join(data_path, "950101")
-    test_path = os.path.join(data_path, "950103")
+    train_path = os.path.join(data_path, "train")
+    test_path = os.path.join(data_path, "950104")
     train_raw = _read_words(train_path)
     test_raw = _read_words(test_path)
 
@@ -98,12 +97,12 @@ if __name__ == "__main__":
     random.seed(0)
     tf.set_random_seed(0)
 
-    train_time = 200
+    train_time = 40000
     LABEL_size = 3
-    SENT_len = 200
+    SENT_len = 300
     CHA_size = 4000
     batch_size = 10
-    embed_size = 20
+    embed_size = 100
     hidden_size = 150
     triangle = []
     for i in range(SENT_len+1):
@@ -161,7 +160,7 @@ if __name__ == "__main__":
         sess.run(train_step, feed_dict={x: batch_xs,
                                         y_: batch_ys,
                                         l:batch_len})
-        print(i,end=" ")
+        print(i, end=" ")
         print(sess.run(cross_entropy, feed_dict={x:train_data[0:batch_size],
                                                  y_:train_label[0:batch_size],
                                                  l:train_sent_len[0:batch_size]}), end=" ")
@@ -174,7 +173,8 @@ if __name__ == "__main__":
                                                              l:train_sent_len[0:batch_size]})[3]
             for k in range(train_sent_len[3]):
                 if foo[k] == 0:
-                    print(check[k], end=" ")
+                    print(end=" ")
+                    print(check[k], end="")
                 else:
                     print(check[k], end="")
             print()

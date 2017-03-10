@@ -8,10 +8,10 @@ import model
 params = {"FREQ_times":10,"SENT_len":300,"embedding_size":100,"batch_size":10,"CHAR_size":4000,"hidden_size":150, 'LABEL_size':6}
 
 if __name__ == '__main__':
-    trainpath = './text_corpus/train'
-    testpath = './text_corpus/devel'
-    webpath = './web_corpus/devel'
-    wikipath = './wiki_corpus/10%train'
+    trainpath = 'text train no path'
+    testpath = 'text test no path'
+    webpath = 'web no path'
+    wikipath = 'wiki no path'
     traindata = data.Dataset(params)
     traindata.read(trainpath)
     testdata = data.Dataset(params)
